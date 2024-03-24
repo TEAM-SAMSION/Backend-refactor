@@ -1,0 +1,246 @@
+[[Todo-Team-API]]
+== Todo Team API
+
+[[가입된-Todo-Team-조회-마이페이지]]
+=== 가입된 Todo Team 조회 (마이페이지용)
+
+operation::todo-team-controller-test/get-todo-teams[snippets='http-request,query-parameters,request-headers,http-response,response-fields']
+
+[[가입된-Todo-Team-조회-메인페이지-todo페이지]]
+=== 가입된 Todo Team 조회 (메인페이지, todo페이지에서 페밀리 선택 버튼)
+
+operation::todo-team-controller-test/get-todo-team-name[snippets='http-request,request-headers,http-response,response-fields']
+
+[[Todo-Team-가입]]
+=== Todo Team 가입
+
+operation::register-controller-test/post-register[snippets='http-request,query-parameters,request-headers,http-response']
+
+[[Todo-Team-생성]]
+=== Todo Team 생성
+
+operation::todo-team-controller-test/post-todo-team[snippets='http-request,request-part-todoTeamCreateInfo-fields,request-headers,http-response']
+
+[[Todo-Team-Code-생성]]
+=== Todo Team Code 생성
+
+operation::todo-team-controller-test/get-todo-team-random-code[snippets='http-request,request-headers,http-response,response-fields']
+
+[[Todo-Team-Id로-Code-조회]]
+=== Todo Team Id로 Todo Team Code 조회
+
+operation::todo-team-controller-test/get-todo-team-code[snippets='http-request,path-parameters,request-headers,http-response,response-fields']
+
+[[Todo-Team-Code로-조회]]
+=== Todo Team Code로 Todo Team 조회
+
+operation::todo-team-controller-test/get-todo-team-by-code[snippets='http-request,path-parameters,request-headers,http-response,response-fields']
+
+[[서비스-탈퇴시-가입된-Todo-Team-조회]]
+=== 서비스 탈퇴시 가입된 Todo Team 조회
+
+operation::todo-team-controller-test/get-withdraw-todo-team[snippets='http-request,request-headers,http-response,response-fields']
+
+[[Todo-Team-상세-정보-조회]]
+=== Todo Team 상세 정보 조회
+
+operation::todo-team-controller-test/get-todo-team-info[snippets='http-request,path-parameters,request-headers,http-response,response-fields']
+
+[[Todo-Team-정보-수정]]
+=== Todo Team 정보 수정
+
+operation::todo-team-controller-test/put-todo-team-info[snippets='http-request,path-parameters,request-part-todoTeamUpdateInfo-fields,request-headers,http-response']
+
+[[가장-최근에-만든-Todo-Team-조회]]
+=== 가장 최근에 만든 Todo Team 조회
+
+operation::todo-team-controller-test/get-todo-team-latest[snippets='http-request,request-headers,http-response,response-fields']
+[[Todo-API]]
+== Todo API
+
+[[할당-받은-Todo-조회-메인페이지-조회용]]
+=== 할당받은 Todo 조회 (메인페이지 조회용)
+
+operation::todo-controller-test/get-todos[snippets='http-request,path-parameters,request-headers,http-response,response-fields']
+
+[[카테고리-하위-Todo-조회]]
+=== 카테고리 하위 Todo 조회
+
+operation::todo-controller-test/get-todo-list[snippets='http-request,path-parameters,request-headers,query-parameters,http-response,response-fields']
+
+[[Todo-달성률]]
+=== Todo 달성률 조회
+
+operation::todo-controller-test/get-todo-progress[snippets='http-request,path-parameters,request-headers,http-response,response-fields']
+
+[[Todo-API-투두-주차-달성률-비교-조회]]
+=== Todo 주차 달성률 비교
+
+operation::todo-controller-test/get-week-progress-compare[snippets='http-request,path-parameters,request-headers,http-response,response-fields']
+
+[[Todo-API-투두생성]]
+=== Todo 생성
+
+operation::todo-controller-test/post-todo[snippets='http-request,request-fields,request-headers,http-response']
+
+[[Todo-날짜-변경]]
+=== Todo 날짜 변경
+
+operation::todo-controller-test/change-scheduled-date[snippets='http-request,path-parameters,request-headers,request-fields,http-response']
+
+[[Todo-이름-변경]]
+=== Todo 이름 변경
+
+operation::todo-controller-test/change-todo-name[snippets='http-request,path-parameters,request-headers,request-fields,http-response']
+
+[[담당자-Todo-완료]]
+=== 담당자 Todo 완료
+
+operation::todo-controller-test/put-assign-status[snippets='http-request,path-parameters,request-headers,http-response']
+
+[[Todo-완료-여부-조회]]
+=== Todo 완료 여부 조회
+
+operation::todo-controller-test/get-todo-completion[snippets='http-request,path-parameters,request-headers,http-response,response-fields']
+
+[[Todo-삭제]]
+=== Todo 삭제
+
+operation::todo-controller-test/delete-todo[snippets='http-request,path-parameters,request-headers,http-response']
+
+[[Todo-삭제-및-수정-검증]]
+=== Todo 삭제 및 수정 검증
+
+operation::todo-controller-test/validate-delete-and-update-todo[snippets='http-request,path-parameters,request-headers,http-response,response-fields']
+
+[[Todo-알림-설정]]
+=== Todo 알림 설정
+
+operation::todo-controller-test/post-notification[snippets='http-request,request-headers,path-parameters,query-parameters,http-response']
+
+[[Todo-알림-설정-조회]]
+
+[[TodoTeam-탈퇴시-담당했던-Todo-조회]]
+=== TodoTeam 탈퇴시 담당했던 Todo 조회
+
+operation::todo-controller-test/get-withdraw-todo-list[snippets='http-request,path-parameters,request-headers,query-parameters,http-response,response-fields']
+
+[[서비스-탈퇴시-담당했던-Todo-조회]]
+=== 서비스 탈퇴시 담당했던 Todo 조회
+
+operation::todo-controller-test/get-all-withdraw-todo-list[snippets='http-request,request-headers,query-parameters,http-response,response-fields']
+
+[[TodoTeam-탈퇴시-담당했던-Todo-개수-조회]]
+=== TodoTeam 탈퇴시 담당했던 Todo 개수 조회
+
+operation::todo-controller-test/get-withdraw-todo-count[snippets='http-request,path-parameters,request-headers,http-response,response-fields']
+
+[[서비스-탈퇴시-담당했던-Todo-개수-조회]]
+=== 서비스 탈퇴시 담당했던 Todo 개수 조회
+
+operation::todo-controller-test/get-all-withdraw-todo-count[snippets='http-request,request-headers,http-response,response-fields']
+
+[[Todo-담당자-수정]]
+=== Todo 담당자 수정
+
+operation::todo-controller-test/change-assign[snippets='http-request,path-parameters,request-headers,request-fields,http-response']
+[[Category-API]]
+== Category API
+
+[[todo-team-id로-카테고리-조회]]
+=== Todo Team Id로 카테고리 조회
+
+operation::category-controller-test/get-category-list[snippets='http-request,path-parameters,request-headers,http-response,response-fields']
+
+[[todo-team-id로-카테고리-조회-관리자-페이지]]
+=== Todo Team Id로 카테고리 조회(관리자 페이지에서 사용)
+
+operation::category-controller-test/get-category-list-for-manage[snippets='http-request,path-parameters,request-headers,http-response,response-fields']
+
+
+[[Category-활성-비활성]]
+=== Category 활성/비활성
+operation::category-controller-test/put-category-status[snippets='http-request,path-parameters,request-headers,http-response']
+
+[[Category-삭제]]
+=== Category 삭제
+operation::category-controller-test/delete-category[snippets='http-request,path-parameters,request-headers,http-response']
+
+[[Category-생성]]
+=== Category 생성
+operation::category-controller-test/post-category[snippets='http-request,request-fields,request-headers,http-response']
+
+[[Category-이름-변경]]
+=== Category 이름 변경
+operation::category-controller-test/put-category-name[snippets='http-request,path-parameters,request-headers,request-fields,http-response']
+
+[[Register-API]]
+== Register API
+
+[[Todo-Team에-가입된-사용자-조회-todo-생성]]
+=== Todo Team에 가입된 사용자 조회 (todo 생성할 때 사용)
+
+operation::register-controller-test/get-registers[snippets='http-request,path-parameters,request-headers,http-response,response-fields']
+
+[[Todo-Team에-가입된-사용자-조회-관리자]]
+=== Todo Team에 가입된 사용자 조회 (관리자 페이지에서 회원 정보 조회할 때 사용)
+
+operation::register-controller-test/get-manage-registers[snippets='http-request,path-parameters,request-headers,http-response,response-fields']
+
+[[Todo-API-Todo-Team에-가입된-사용자-권한-수정]]
+=== Todo Team에 가입된 사용자 권한 수정
+
+operation::register-controller-test/put-authority[snippets='http-request,path-parameters,request-headers,request-fields,http-response']
+
+[[Todo-Teamd에-가입된-사용자-검색]]
+=== Todo Team에 가입된 사용자 검색
+
+operation::register-controller-test/get-register-by-nickname[snippets='http-request,path-parameters,request-headers,query-parameters,http-response,response-fields']
+
+[[Todo-Team-탈퇴]]
+=== Todo Team 탈퇴
+
+operation::register-controller-test/unregister-todo-team[snippets='http-request,path-parameters,request-headers,http-response']
+
+[[Todo-팀-가입-기간-조회]]
+=== Todo 팀 가입 기간 조회
+
+operation::register-controller-test/get-register-term[snippets='http-request,path-parameters,request-headers,http-response,response-fields']
+
+[[Todo-팀-가입자-내보내기]]
+=== Todo 팀 가입자 내보내기
+
+operation::register-controller-test/unregister-register[snippets='http-request,path-parameters,request-headers,http-response']
+
+[[Todo-팀-탈퇴-검증]]
+=== Todo 팀 탈퇴 검증
+
+operation::register-controller-test/validate-register-deletable[snippets='http-request,path-parameters,request-headers,http-response,response-fields']
+
+[[서비스-탈퇴-검증]]
+=== 서비스 탈퇴 검증
+
+operation::register-controller-test/validate-registers-deletable[snippets='http-request,request-headers,http-response,response-fields']
+
+[[PET-API]]
+== PET API
+
+[[PET-조회]]
+=== PET 조회
+
+operation::pet-controller-test/get-todo-team-pets[snippets='http-request,path-parameters,request-headers,http-response,response-fields']
+
+[[PET-생성]]
+=== PET 생성
+
+operation::pet-controller-test/post-todo-team-pet[snippets='http-request,path-parameters,request-part-petCreateInfo-fields,request-headers,http-response']
+
+[[PET-삭제]]
+=== PET 삭제
+
+operation::pet-controller-test/delete-todo-team-pet[snippets='http-request,path-parameters,request-headers,http-response']
+
+[[PET-정보-수정]]
+=== PET 정보 수정
+
+operation::pet-controller-test/put-todo-team-pet[snippets='http-request,path-parameters,request-headers,request-part-petUpdateInfo-fields,http-response']

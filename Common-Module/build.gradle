@@ -1,0 +1,7 @@
+dependencies {
+    // security
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    testFixturesImplementation 'org.springframework.security:spring-security-test'
+    // mvc web
+    testFixturesImplementation('org.springframework.boot:spring-boot-starter-web')
+}

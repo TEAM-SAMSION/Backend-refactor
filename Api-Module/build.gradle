@@ -1,0 +1,20 @@
+apply from: "$rootDir/gradle/customplugin/gradleutils.gradle"
+
+dependencies {
+    // actuators
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    runtimeOnly 'io.micrometer:micrometer-registry-prometheus'
+
+    implementation project(":Log-Module")
+
+    implementation project(':Alarm-Module')
+
+    implementation project(':Batch-Module')
+
+    implementation project(':Event')
+
+    getProjectsEndsWith("Domain-Module", "Presentation").forEach { module ->
+        implementation project(module.path)
+    }
+
+}

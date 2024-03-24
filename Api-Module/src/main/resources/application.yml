@@ -1,0 +1,16 @@
+spring:
+  profiles:
+    include:
+      - test
+
+  servlet:
+    multipart:
+      max-file-size: 2MB
+
+management:
+  server:
+    port: 8079
+  endpoints:
+    web:
+      exposure:
+        include: prometheus, health

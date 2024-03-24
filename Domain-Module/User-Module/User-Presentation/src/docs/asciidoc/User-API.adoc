@@ -1,0 +1,44 @@
+[[User-API]]
+== User-API
+
+[[UserAuthorityController-사용자권한확인]]
+=== 사용자 권한 확인
+
+operation::user-authority-controller-test/get-user-authority[snippets='http-request,request-headers,http-response,response-fields']
+
+[[UserController-사용자정보조회]]
+=== 사용자 정보 조회
+
+operation::user-controller-test/get-user-info[snippets='http-request,request-headers,http-response,response-fields']
+
+
+[[UserController-닉네임변경]]
+=== 사용자 닉네임 변경
+
+operation::user-controller-test/put-nickname-on-user[snippets='http-request,request-fields,request-headers,http-response']
+
+[[UserController-프로필이미지변경]]
+=== 사용자 프로필 이미지 변경
+
+operation::user-controller-test/post-user-profile-image[snippets='http-request,request-headers,request-parts,http-response']
+
+
+[[UserController-알게된경로저장]]
+=== 포잇을 알게된 경로 저장
+
+operation::user-controller-test/post-path-history[snippets='http-request,request-headers,request-fields,http-response']
+
+[[사용자-탈퇴]]
+=== 사용자 탈퇴
+
+operation::user-controller-test/delete-user[snippets='http-request,request-headers,http-response']
+
+[[사용자-가입-기간-조회]]
+=== 사용자 가입 기간 조회
+
+operation::user-controller-test/get-term[snippets='http-request,request-headers,http-response,response-fields']
+
+[[사용자-탈퇴-이유-저장]]
+=== 사용자 탈퇴 이유 저장
+
+operation::user-controller-test/post-withdraw-reason[snippets='http-request,request-headers,request-fields,http-response']
