@@ -1,21 +1,17 @@
-package com.pawith.userpresentation;
+package com.pawith.userpresentation
 
-import com.pawith.userapplication.dto.response.UserAuthorityInfoResponse;
-import com.pawith.userapplication.service.UserAuthorityGetUseCase;
-import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.pawith.userapplication.dto.response.UserAuthorityInfoResponse
+import com.pawith.userapplication.service.UserAuthorityGetService
+import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RestController
 
 @RestController
-@RequiredArgsConstructor
 @RequestMapping("/user")
-public class UserAuthorityController {
-    private final UserAuthorityGetUseCase userAuthorityGetUseCase;
-
+class UserAuthorityController (
+    val userAuthorityGetUService: UserAuthorityGetService,
+){
 
     @GetMapping("/authority")
-    public UserAuthorityInfoResponse getUserAuthority() {
-        return userAuthorityGetUseCase.getUserAuthority();
-    }
+    fun getAuthority() : UserAuthorityInfoResponse = userAuthorityGetUService.readUserAuthority()
 }

@@ -1,59 +1,59 @@
-package com.pawith.userpresentation;
+package com.pawith.userpresentation
 
-import com.pawith.userapplication.dto.request.PathHistoryCreateRequest;
-import com.pawith.userapplication.dto.request.UserNicknameChangeRequest;
-import com.pawith.userapplication.dto.request.WithdrawReasonCreateRequest;
-import com.pawith.userapplication.dto.response.UserInfoResponse;
-import com.pawith.userapplication.dto.response.UserJoinTermResponse;
-import com.pawith.userapplication.service.*;
-import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
+import com.pawith.userapplication.dto.request.PathHistoryCreateRequest
+import com.pawith.userapplication.dto.request.UserNicknameModifyRequest
+import com.pawith.userapplication.dto.request.WithdrawReasonCreateRequest
+import com.pawith.userapplication.service.*
+import org.springframework.web.bind.annotation.DeleteMapping
+import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.PutMapping
+import org.springframework.web.bind.annotation.RequestBody
+import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RequestPart
+import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.multipart.MultipartFile
 
 @RestController
-@RequiredArgsConstructor
 @RequestMapping("/user")
-public class UserController {
-
-    private final UserNicknameChangeUseCase userNicknameChangeUseCase;
-    private final UserInfoGetUseCase userInfoGetUseCase;
-    private final UserProfileImageUpdateUseCase userProfileImageUpdateUseCase;
-    private final PathHistoryCreateUseCase pathHistoryCreateUseCase;
-    private final UserDeleteUseCase userDeleteUseCase;
-    private final WithdrawReasonCreateUseCase withdrawReasonCreateUseCase;
+class UserController(
+    val userNicknameChangeService: UserNicknameChangeService,
+    val userInfoGetService: UserInfoGetService,
+    val userProfileImageUpdateService: UserProfileImageUpdateService,
+    val pathHistoryCreateService: PathHistoryCreateService,
+    val userDeleteService: UserDeleteService,
+    val withdrawReasonCreateService: WithdrawReasonCreateService
+) {
 
     @PutMapping("/name")
-    public void putNicknameOnUser(@RequestBody UserNicknameChangeRequest request){
-        userNicknameChangeUseCase.changeUserName(request);
-    }
+    fun putNicknameOnUser(
+        @RequestBody request: UserNicknameModifyRequest
+    ) = userNicknameChangeService.changeUserNickname(request)
+
 
     @GetMapping
-    public UserInfoResponse getUserInfo(){
-        return userInfoGetUseCase.getUserInfo();
-    }
+    fun getUserInfo() = userInfoGetService.readUserInfo()
 
-    @PostMapping(consumes = "multipart/form-data")
-    public void postUserProfileImage(@RequestPart(name = "profileImage") MultipartFile request){
-        userProfileImageUpdateUseCase.updateUserProfileImage(request);
-    }
+    @PostMapping(consumes = ["multipart/form-data"])
+    fun postUserProfileImage(
+        @RequestPart(name = "profileImage") requestImage: MultipartFile
+    ) = userProfileImageUpdateService.updateUserProfileImage(requestImage)
 
     @PostMapping("/path")
-    public void postPathHistory(@RequestBody PathHistoryCreateRequest pathHistoryCreateRequest){
-        pathHistoryCreateUseCase.createPathHistory(pathHistoryCreateRequest);
-    }
+    fun postPathHistory(
+        @RequestBody request: PathHistoryCreateRequest
+    ) = pathHistoryCreateService.createPathHistory(request)
+
 
     @DeleteMapping
-    public void deleteUser(){
-        userDeleteUseCase.deleteUser();
-    }
+    fun deleteUser() = userDeleteService.deleteUser()
 
     @GetMapping("/term")
-    public UserJoinTermResponse getTerm() {
-        return userInfoGetUseCase.getTerm();
-    }
+    fun getTerm() = userInfoGetService.readUserJoinTerm()
 
     @PostMapping("/withdraw")
-    public void postWithdrawReason(@RequestBody WithdrawReasonCreateRequest withDrawCreateRequest){
-        withdrawReasonCreateUseCase.createWithdrawReason(withDrawCreateRequest);
-    }
+    fun postWithdrawReason(
+        @RequestBody request: WithdrawReasonCreateRequest
+    ) = withdrawReasonCreateService.createWithdrawReason(request)
+
 }
