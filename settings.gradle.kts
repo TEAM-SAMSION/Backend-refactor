@@ -19,8 +19,9 @@ include ("Domain-Module:Auth-Module")
 include ("Domain-Module:Auth-Module:Auth-Presentation")
 include ("Domain-Module:Auth-Module:Auth-Application")
 include ("Domain-Module:Auth-Module:Auth-Domain")
+
+
 include ("Common-Module")
 include ("Image-Module")
 include ("Alarm-Module")
-include ("Event")
 include ("Batch-Module")
