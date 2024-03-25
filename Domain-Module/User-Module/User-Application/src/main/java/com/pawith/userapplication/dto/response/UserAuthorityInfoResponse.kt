@@ -1,13 +1,7 @@
-package com.pawith.userapplication.dto.response;
+package com.pawith.userapplication.dto.response
 
-import com.pawith.userdomain.entity.Authority;
-import lombok.Getter;
+import com.pawith.userdomain.entity.Authority
 
-@Getter
-public class UserAuthorityInfoResponse {
-    private final Authority authority;
-
-    public UserAuthorityInfoResponse(Authority authority) {
-        this.authority = authority;
-    }
-}
+data class UserAuthorityInfoResponse (
+    val authority: Authority
+)

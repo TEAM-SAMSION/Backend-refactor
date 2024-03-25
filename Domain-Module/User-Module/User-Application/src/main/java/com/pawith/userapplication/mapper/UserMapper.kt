@@ -1,19 +1,27 @@
-package com.pawith.userapplication.mapper;
+package com.pawith.userapplication.mapper
 
-import com.pawith.commonmodule.annotation.Mapper;
-import com.pawith.commonmodule.event.UserSignUpEvent;
-import com.pawith.userdomain.entity.User;
+import com.pawith.commonmodule.annotation.Mapper
+import com.pawith.commonmodule.event.UserSignUpEvent
+import com.pawith.userapplication.dto.response.UserInfoResponse
+import com.pawith.userdomain.entity.User
 
 @Mapper
-public class UserMapper {
+class UserMapper {
 
-    public static User toUserEntity(UserSignUpEvent userSignUpEvent, String imageUrl) {
-        return User.builder()
-            .nickname(userSignUpEvent.nickname())
-            .email(userSignUpEvent.email())
-//            .provider(userSignUpEvent.provider())
-            .imageUrl(imageUrl)
-            .build();
+    fun toUserEntity(event: UserSignUpEvent, imageUrl: String): User {
+        return User(
+            event.nickname,
+            event.email,
+            imageUrl,
+            null
+        )
     }
 
+    fun toUserInfoResponse(user: User): UserInfoResponse {
+        return UserInfoResponse(
+            user.nickname,
+            user.email,
+            user.imageUrl
+        )
+    }
 }

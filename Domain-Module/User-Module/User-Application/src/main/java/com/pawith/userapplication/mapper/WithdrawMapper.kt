@@ -1,12 +1,15 @@
-package com.pawith.userapplication.mapper;
+package com.pawith.userapplication.mapper
 
-import com.pawith.userapplication.dto.request.WithdrawReasonCreateRequest;
-import com.pawith.userdomain.entity.WithdrawReason;
+import com.pawith.commonmodule.annotation.Mapper
+import com.pawith.userapplication.dto.request.WithdrawReasonCreateRequest
+import com.pawith.userdomain.entity.WithdrawReason
 
-public class WithdrawMapper {
-        public static WithdrawReason toWithdrawReasonEntity(WithdrawReasonCreateRequest withDrawReasonCreateRequest) {
-            return WithdrawReason.builder()
-                    .reason(withDrawReasonCreateRequest.getReason())
-                    .build();
-        }
+@Mapper
+class WithdrawMapper {
+
+    fun toWithdrawReasonEntity(request: WithdrawReasonCreateRequest): WithdrawReason {
+        return WithdrawReason(
+            request.reason
+        )
+    }
 }

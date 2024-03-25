@@ -1,32 +1,29 @@
-package com.pawith.userapplication.handler;
+package com.pawith.userapplication.handler
 
-import com.pawith.commonmodule.event.UserSignUpEvent;
-import com.pawith.userapplication.mapper.UserMapper;
-import com.pawith.userdomain.entity.User;
-import com.pawith.userdomain.service.UserAuthoritySaveService;
-import com.pawith.userdomain.service.UserSaveService;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.context.event.EventListener;
-import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
+import com.pawith.commonmodule.event.UserSignUpEvent
+import com.pawith.userapplication.mapper.UserMapper
+import com.pawith.userdomain.service.UserAuthoritySaveService
+import com.pawith.userdomain.service.UserSaveService
+import org.springframework.context.event.EventListener
+import org.springframework.stereotype.Component
 
-@Slf4j
 @Component
-@RequiredArgsConstructor
-public class UserSignUpHandler {
+class UserSignUpHandler(
+    val userSaveService: UserSaveService,
+    val userAuthoritySaveService: UserAuthoritySaveService,
+    val userMapper: UserMapper
+) {
 
-    private static final String DEFAULT_PROFILE_IMAGE_URL = "https://pawith.s3.ap-northeast-2.amazonaws.com/base-image/default_user.png";
+    companion object{
+        const val DEFAULT_PROFILE_IMAGE_URL: String = "https://pawith.s3.ap-northeast-2.amazonaws.com/base-image/default_user.png"
+    }
 
-    private final UserSaveService userSaveService;
-    private final UserAuthoritySaveService userAuthoritySaveService;
 
-    @Transactional
     @EventListener
-    public void signUp(final UserSignUpEvent userSignUpEvent) {
-        final User user = UserMapper.toUserEntity(userSignUpEvent, DEFAULT_PROFILE_IMAGE_URL);
-        userSaveService.saveUser(user);
-        userAuthoritySaveService.saveUserAuthority(user);
+    fun signUp(userSignUpEvent: UserSignUpEvent){
+        val user = userMapper.toUserEntity(userSignUpEvent, DEFAULT_PROFILE_IMAGE_URL)
+        userSaveService.saveUser(user)
+        userAuthoritySaveService.saveUserAuthority(user)
     }
 
 }
