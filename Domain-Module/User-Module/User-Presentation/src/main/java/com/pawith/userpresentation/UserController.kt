@@ -32,7 +32,7 @@ class UserController(
 
 
     @GetMapping
-    fun getUserInfo() = userInfoGetService.readUserInfo()
+    fun getUserInfo() = userInfoGetService.getUserInfo()
 
     @PostMapping(consumes = ["multipart/form-data"])
     fun postUserProfileImage(
@@ -49,7 +49,7 @@ class UserController(
     fun deleteUser() = userDeleteService.deleteUser()
 
     @GetMapping("/term")
-    fun getTerm() = userInfoGetService.readUserJoinTerm()
+    fun getTerm() = userInfoGetService.getUserInfo()
 
     @PostMapping("/withdraw")
     fun postWithdrawReason(

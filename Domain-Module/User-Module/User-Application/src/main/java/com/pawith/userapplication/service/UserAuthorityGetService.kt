@@ -13,7 +13,7 @@ class UserAuthorityGetService (
     private val userUtils: UserUtils
 ){
 
-    fun readUserAuthority(): UserAuthorityInfoResponse {
+    fun getUserAuthority(): UserAuthorityInfoResponse {
         val userId = userUtils.idFromAccessUser;
         val userAuthority = userAuthorityReader.findByUserId(userId);
         return UserAuthorityInfoResponse(userAuthority.authority);
