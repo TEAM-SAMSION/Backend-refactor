@@ -20,7 +20,7 @@ class UserNicknameChangeService (
     fun changeUserNickname(request: UserNicknameModifyRequest){
         val user = userUtils.accessUser
         userModifier.modifyNickname(user, request.nickname)
-        val userAuthority = userAuthorityReader.findByUserId(user.id)
+        val userAuthority = userAuthorityReader.readByUserId(user.id)
         userAuthorityModifier.modifyAuthorityGuestToUser(userAuthority)
     }
 }

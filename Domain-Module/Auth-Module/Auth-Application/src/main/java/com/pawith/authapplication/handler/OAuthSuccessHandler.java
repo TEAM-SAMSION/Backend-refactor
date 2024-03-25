@@ -35,11 +35,11 @@ public class OAuthSuccessHandler {
     public void handle(OAuthSuccessEvent oAuthSuccessEvent) {
         if (oAuthQueryService.existBySub(oAuthSuccessEvent.sub())) {
             final OAuth oAuth = oAuthQueryService.findBySub(oAuthSuccessEvent.sub());
-            final User user = userReader.findById(oAuth.getUserId());
+            final User user = userReader.readByUserId(oAuth.getUserId());
             user.updateEmail(oAuthSuccessEvent.email());
         } else {
             if (userValidator.isEmailExist(oAuthSuccessEvent.email())) {
-                final User user = userReader.findByEmail(oAuthSuccessEvent.email());
+                final User user = userReader.readByEmail(oAuthSuccessEvent.email());
                 if (oAuthQueryService.existByUserId(user.getId())|| user.isNotMatchingProvider(oAuthSuccessEvent.provider())) {
                     throw new OAuthException(AuthError.INVALID_OAUTH_REQUEST);
                 }
@@ -49,7 +49,7 @@ public class OAuthSuccessHandler {
                     oAuthSuccessEvent.username(),
                     oAuthSuccessEvent.email()
                 ));
-                final User user = userReader.findByEmail(oAuthSuccessEvent.email());
+                final User user = userReader.readByEmail(oAuthSuccessEvent.email());
                 saveOAuth(oAuthSuccessEvent, user);
             }
         }

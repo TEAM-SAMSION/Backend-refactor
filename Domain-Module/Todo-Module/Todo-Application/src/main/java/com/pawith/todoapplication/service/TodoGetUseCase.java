@@ -59,7 +59,7 @@ public class TodoGetUseCase {
         final Map<Long, TodoNotification> todoNotificationMap =
             todoNotificationQueryService.findMapTodoIdKeyAndTodoNotificationValueByTodoIdsAndUserId(todoList, accessUser.getId());
 
-        final Map<Long, User> userMap = userReader.findUserMapByIds(extractUserIds(assignList));
+        final Map<Long, User> userMap = userReader.readUsersMapByIds(extractUserIds(assignList));
 
         final List<CategorySubTodoResponse> subTodoResponseList = todoList.stream()
             .map(todo -> {

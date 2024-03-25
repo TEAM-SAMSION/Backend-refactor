@@ -11,23 +11,23 @@ import org.springframework.data.repository.findByIdOrNull
 class UserReader(
     private val userRepository: UserRepository
 ) {
-    fun findByEmail(email: String): User {
-        return findUser { userRepository.findByEmail(email) }
+    fun readByEmail(email: String): User {
+        return readUser { userRepository.findByEmail(email) }
     }
 
-    fun findById(userId: Long): User {
-        return findUser { userRepository.findByIdOrNull(userId) }
+    fun readByUserId(userId: Long): User {
+        return readUser { userRepository.findByIdOrNull(userId) }
     }
 
-    fun findUserMapByIds(userIds: List<Long>) : Map<Long, User> {
+    fun readUsersMapByIds(userIds: List<Long>) : Map<Long, User> {
         return userRepository.findAllByIds(userIds).associateBy { it.id }
     }
 
-    fun findAllByNicknameAndUserIds(nickname: String, userIds: List<Long>) : List<User>{
+    fun readAllByNicknameAndUserIds(nickname: String, userIds: List<Long>) : List<User>{
         return userRepository.findAllByNicknameAndIds(nickname, userIds)
     }
 
-    private fun findUser(findMethod: () -> User?): User {
+    private fun readUser(findMethod: () -> User?): User {
         return findMethod() ?: throw UserNotFoundException(UserError.USER_NOT_FOUND)
     }
 }

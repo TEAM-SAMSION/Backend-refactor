@@ -53,7 +53,7 @@ public class TodoTeamGetUseCase {
     public TodoTeamSearchInfoResponse searchTodoTeamByCode(final String code) {
         final TodoTeam todoTeam = todoTeamQueryService.findTodoTeamByCode(code);
         final Register presidentRegister = registerQueryService.findPresidentRegisterByTodoTeamId(todoTeam.getId());
-        final User presidentUser = userReader.findById(presidentRegister.getUserId());
+        final User presidentUser = userReader.readByUserId(presidentRegister.getUserId());
         final Integer registerCount = registerQueryService.countRegisterByTodoTeamId(todoTeam.getId());
         return TodoTeamMapper.mapToTodoTeamSearchInfoResponse(todoTeam, presidentUser, registerCount);
     }

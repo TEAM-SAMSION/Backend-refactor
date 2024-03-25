@@ -16,7 +16,7 @@ public class UserUtils {
 
     public User getAccessUser(){
         final Long userId = SecurityUtils.getAuthenticationPrincipal();
-        return userReader.findById(userId);
+        return userReader.readByUserId(userId);
     }
 
     public Long getIdFromAccessUser(){

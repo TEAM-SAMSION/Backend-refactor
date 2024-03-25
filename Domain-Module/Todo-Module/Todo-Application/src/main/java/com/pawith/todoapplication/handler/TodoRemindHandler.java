@@ -47,7 +47,7 @@ public class TodoRemindHandler {
         final List<Long> incompleteTodoUserIds = incompleteAssignInfoDaoList.stream()
             .map(IncompleteAssignInfoDao::getUserId)
             .toList();
-        final Map<Long, User> incompleteTodoUserMap = userReader.findUserMapByIds(incompleteTodoUserIds);
+        final Map<Long, User> incompleteTodoUserMap = userReader.readUsersMapByIds(incompleteTodoUserIds);
         return incompleteAssignInfoDaoList.stream()
             .map(incompleteAssignInfo -> {
                 final User incompleteTodoUser = incompleteTodoUserMap.get(incompleteAssignInfo.getUserId());
