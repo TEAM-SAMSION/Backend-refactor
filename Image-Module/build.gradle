@@ -1,7 +1,0 @@
-dependencies {
-    //AWS S3
-    implementation 'org.springframework.cloud:spring-cloud-starter-aws'
-
-    implementation project(":Common-Module")
-    testImplementation(testFixtures(project(':Common-Module')))
-}
