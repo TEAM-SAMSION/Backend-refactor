@@ -10,7 +10,7 @@ import com.pawith.tododomain.entity.Register;
 import com.pawith.tododomain.service.RegisterQueryService;
 import com.pawith.tododomain.util.RegisterUtils;
 import com.pawith.userdomain.entity.User;
-import com.pawith.userdomain.service.UserQueryService;
+import com.pawith.userdomain.service.user.UserReader;
 import com.pawith.userdomain.utils.UserUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,11 +25,11 @@ public class RegistersGetUseCase {
 
     private final UserUtils userUtils;
     private final RegisterQueryService registerQueryService;
-    private final UserQueryService userQueryService;
+    private final UserReader userReader;
 
     public ListResponse<RegisterInfoResponse> getRegisters(final Long teamId) {
         final List<Register> allRegisters = registerQueryService.findAllRegistersByTodoTeamId(teamId);
-        final Map<Long, User> registerUserMap = userQueryService.findMapWithUserIdKeyByIds(RegisterUtils.extractUserIds(allRegisters));
+        final Map<Long, User> registerUserMap = userReader.readUsersMapByIds(RegisterUtils.extractUserIds(allRegisters));
         final List<RegisterInfoResponse> registerSimpleInfoResponses = allRegisters.stream()
             .map(register -> {
                 final User registerUser = registerUserMap.get(register.getUserId());
@@ -41,7 +41,7 @@ public class RegistersGetUseCase {
 
     public ListResponse<RegisterManageInfoResponse> getManageRegisters(final Long teamId) {
         final List<Register> allRegisters = RegisterUtils.sortByAuthority(registerQueryService.findAllRegistersByTodoTeamId(teamId));
-        final Map<Long, User> registerUserMap = userQueryService.findMapWithUserIdKeyByIds(RegisterUtils.extractUserIds(allRegisters));
+        final Map<Long, User> registerUserMap = userReader.readUsersMapByIds(RegisterUtils.extractUserIds(allRegisters));
         final List<RegisterManageInfoResponse> manageRegisterInfoResponses =
             allRegisters.stream()
                 .map(register -> {
@@ -60,7 +60,7 @@ public class RegistersGetUseCase {
 
     public ListResponse<RegisterSearchInfoResponse> searchRegisterByNickname(final Long todoTeamId, final String nickname) {
         final List<Register> registers = RegisterUtils.sortByAuthority(registerQueryService.findAllRegistersByTodoTeamId(todoTeamId));
-        final List<User> users = userQueryService.findAllByNicknameAndIds(nickname, RegisterUtils.extractUserIds(registers));
+        final List<User> users = userReader.readAllByNicknameAndUserIds(nickname, RegisterUtils.extractUserIds(registers));
         final Map<Long, Register> registerMap = RegisterUtils.convertToMapWithUserIdKey(registers);
         final List<RegisterSearchInfoResponse> registerSearchInfoResponses = users.stream()
             .map(user -> {

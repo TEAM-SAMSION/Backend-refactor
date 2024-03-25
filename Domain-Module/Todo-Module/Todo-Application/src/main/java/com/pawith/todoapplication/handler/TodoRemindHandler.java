@@ -8,7 +8,7 @@ import com.pawith.tododomain.entity.CompletionStatus;
 import com.pawith.tododomain.repository.dao.IncompleteAssignInfoDao;
 import com.pawith.tododomain.service.AssignQueryService;
 import com.pawith.userdomain.entity.User;
-import com.pawith.userdomain.service.UserQueryService;
+import com.pawith.userdomain.service.user.UserReader;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.event.EventListener;
@@ -26,7 +26,7 @@ public class TodoRemindHandler {
     private static final String REMIND_CACHE_KEY = "Remind:%s";
 
     private final AssignQueryService assignQueryService;
-    private final UserQueryService userQueryService;
+    private final UserReader userReader;
     private final CacheTemplate<String, String> cacheTemplate;
     private final ApplicationEventPublisher applicationEventPublisher;
 
@@ -47,7 +47,7 @@ public class TodoRemindHandler {
         final List<Long> incompleteTodoUserIds = incompleteAssignInfoDaoList.stream()
             .map(IncompleteAssignInfoDao::getUserId)
             .toList();
-        final Map<Long, User> incompleteTodoUserMap = userQueryService.findMapWithUserIdKeyByIds(incompleteTodoUserIds);
+        final Map<Long, User> incompleteTodoUserMap = userReader.readUsersMapByIds(incompleteTodoUserIds);
         return incompleteAssignInfoDaoList.stream()
             .map(incompleteAssignInfo -> {
                 final User incompleteTodoUser = incompleteTodoUserMap.get(incompleteAssignInfo.getUserId());

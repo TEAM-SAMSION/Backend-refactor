@@ -11,7 +11,7 @@ import com.pawith.tododomain.service.PetQueryService;
 import com.pawith.tododomain.service.RegisterQueryService;
 import com.pawith.tododomain.service.TodoTeamQueryService;
 import com.pawith.userdomain.entity.User;
-import com.pawith.userdomain.service.UserQueryService;
+import com.pawith.userdomain.service.user.UserReader;
 import com.pawith.userdomain.utils.UserUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
@@ -19,7 +19,6 @@ import org.springframework.data.domain.Slice;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @ApplicationService
 @RequiredArgsConstructor
@@ -29,7 +28,7 @@ public class TodoTeamGetUseCase {
     private final UserUtils userUtils;
     private final RegisterQueryService registerQueryService;
     private final TodoTeamQueryService todoTeamQueryService;
-    private final UserQueryService userQueryService;
+    private final UserReader userReader;
     private final PetQueryService petQueryService;
 
 
@@ -54,7 +53,7 @@ public class TodoTeamGetUseCase {
     public TodoTeamSearchInfoResponse searchTodoTeamByCode(final String code) {
         final TodoTeam todoTeam = todoTeamQueryService.findTodoTeamByCode(code);
         final Register presidentRegister = registerQueryService.findPresidentRegisterByTodoTeamId(todoTeam.getId());
-        final User presidentUser = userQueryService.findById(presidentRegister.getUserId());
+        final User presidentUser = userReader.readByUserId(presidentRegister.getUserId());
         final Integer registerCount = registerQueryService.countRegisterByTodoTeamId(todoTeam.getId());
         return TodoTeamMapper.mapToTodoTeamSearchInfoResponse(todoTeam, presidentUser, registerCount);
     }

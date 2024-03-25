@@ -13,5 +13,5 @@ class UserAuthorityController (
 ){
 
     @GetMapping("/authority")
-    fun getAuthority() : UserAuthorityInfoResponse = userAuthorityGetUService.readUserAuthority()
+    fun getAuthority() : UserAuthorityInfoResponse = userAuthorityGetUService.getUserAuthority()
 }

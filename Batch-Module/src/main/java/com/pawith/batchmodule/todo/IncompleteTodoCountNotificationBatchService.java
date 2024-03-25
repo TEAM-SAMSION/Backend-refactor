@@ -6,7 +6,7 @@ import com.pawith.commonmodule.event.NotificationEvent;
 import com.pawith.commonmodule.schedule.AbstractBatchSchedulingHandler;
 import com.pawith.tododomain.repository.RegisterRepository;
 import com.pawith.tododomain.repository.dao.IncompleteTodoCountInfoDao;
-import com.pawith.userdomain.service.UserQueryService;
+import com.pawith.userdomain.service.user.UserReader;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.data.domain.Pageable;
@@ -23,14 +23,14 @@ public class IncompleteTodoCountNotificationBatchService extends AbstractBatchSc
     private static final String NOTIFICATION_MESSAGE = "[%s] 오늘이 지나기 전, %s님에게 남은 %d개의 todo를 완료해주세요!";
 
     private final RegisterRepository registerRepository;
-    private final UserQueryService userQueryService;
+    private final UserReader userReader;
     private final ApplicationEventPublisher applicationEventPublisher;
     private final ValueOperator<Long, String> valueOperator;
 
-    public IncompleteTodoCountNotificationBatchService(RegisterRepository registerRepository, UserQueryService userQueryService, ApplicationEventPublisher applicationEventPublisher, ValueOperator<Long, String> valueOperator) {
+    public IncompleteTodoCountNotificationBatchService(RegisterRepository registerRepository, UserReader userReader, ApplicationEventPublisher applicationEventPublisher, ValueOperator<Long, String> valueOperator) {
         super(BATCH_SIZE, CRON_EXPRESSION);
         this.registerRepository = registerRepository;
-        this.userQueryService = userQueryService;
+        this.userReader = userReader;
         this.applicationEventPublisher = applicationEventPublisher;
         this.valueOperator = valueOperator;
     }
@@ -58,7 +58,7 @@ public class IncompleteTodoCountNotificationBatchService extends AbstractBatchSc
             .map(IncompleteTodoCountInfoDao::getUserId)
             .filter(userId -> !valueOperator.contains(userId))
             .toList();
-        userQueryService.findMapWithUserIdKeyByIds(userIds)
+        userReader.readUsersMapByIds(userIds)
             .forEach((userId, user) -> valueOperator.setWithExpire(userId, user.getNickname(), 1, TimeUnit.MINUTES));
     }
 }
