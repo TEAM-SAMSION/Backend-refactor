@@ -8,7 +8,8 @@ import com.pawith.authdomain.service.OAuthQueryService;
 import com.pawith.authdomain.service.OAuthSaveService;
 import com.pawith.commonmodule.event.UserSignUpEvent;
 import com.pawith.userdomain.entity.User;
-import com.pawith.userdomain.service.UserQueryService;
+import com.pawith.userdomain.service.user.UserReader;
+import com.pawith.userdomain.service.user.UserValidator;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationEventPublisher;
@@ -22,7 +23,8 @@ import org.springframework.transaction.annotation.Transactional;
 public class OAuthSuccessHandler {
     private final OAuthQueryService oAuthQueryService;
     private final OAuthSaveService oAuthSaveService;
-    private final UserQueryService userQueryService;
+    private final UserReader userReader;
+    private final UserValidator userValidator;
     private final ApplicationEventPublisher applicationEventPublisher;
 
     @EventListener(OAuthSuccessEvent.class)
@@ -33,11 +35,11 @@ public class OAuthSuccessHandler {
     public void handle(OAuthSuccessEvent oAuthSuccessEvent) {
         if (oAuthQueryService.existBySub(oAuthSuccessEvent.sub())) {
             final OAuth oAuth = oAuthQueryService.findBySub(oAuthSuccessEvent.sub());
-            final User user = userQueryService.findById(oAuth.getUserId());
+            final User user = userReader.findById(oAuth.getUserId());
             user.updateEmail(oAuthSuccessEvent.email());
         } else {
-            if (userQueryService.checkEmailAlreadyExist(oAuthSuccessEvent.email())) {
-                final User user = userQueryService.findByEmail(oAuthSuccessEvent.email());
+            if (userValidator.isEmailExist(oAuthSuccessEvent.email())) {
+                final User user = userReader.findByEmail(oAuthSuccessEvent.email());
                 if (oAuthQueryService.existByUserId(user.getId())|| user.isNotMatchingProvider(oAuthSuccessEvent.provider())) {
                     throw new OAuthException(AuthError.INVALID_OAUTH_REQUEST);
                 }
@@ -47,7 +49,7 @@ public class OAuthSuccessHandler {
                     oAuthSuccessEvent.username(),
                     oAuthSuccessEvent.email()
                 ));
-                final User user = userQueryService.findByEmail(oAuthSuccessEvent.email());
+                final User user = userReader.findByEmail(oAuthSuccessEvent.email());
                 saveOAuth(oAuthSuccessEvent, user);
             }
         }

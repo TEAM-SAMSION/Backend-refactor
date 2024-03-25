@@ -9,8 +9,8 @@ import org.springframework.web.multipart.MultipartFile
 @ApplicationService
 @Transactional
 class UserProfileImageUpdateService (
-    val userUtils: UserUtils,
-    val imageUploadService: ImageUploadService
+    private val userUtils: UserUtils,
+    private val imageUploadService: ImageUploadService
 ){
 
     fun updateUserProfileImage(image: MultipartFile){

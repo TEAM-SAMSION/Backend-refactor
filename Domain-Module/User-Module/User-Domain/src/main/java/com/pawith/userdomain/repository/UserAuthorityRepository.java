@@ -9,5 +9,5 @@ public interface UserAuthorityRepository extends JpaRepository<UserAuthority, Lo
 
     Optional<UserAuthority> findByEmail(String email);
 
-    Optional<UserAuthority> findByUserId(Long userId);
+    UserAuthority findByUserId(Long userId);
 }

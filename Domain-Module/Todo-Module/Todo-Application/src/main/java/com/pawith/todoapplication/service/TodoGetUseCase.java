@@ -13,7 +13,7 @@ import com.pawith.tododomain.service.TodoNotificationQueryService;
 import com.pawith.tododomain.util.AssignUtils;
 import com.pawith.tododomain.util.RegisterUtils;
 import com.pawith.userdomain.entity.User;
-import com.pawith.userdomain.service.UserQueryService;
+import com.pawith.userdomain.service.user.UserReader;
 import com.pawith.userdomain.utils.UserUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -30,7 +30,7 @@ import java.util.concurrent.atomic.AtomicReference;
 public class TodoGetUseCase {
 
     private final UserUtils userUtils;
-    private final UserQueryService userQueryService;
+    private final UserReader userReader;
     private final AssignQueryService assignQueryService;
     private final TodoNotificationQueryService todoNotificationQueryService;
 
@@ -59,7 +59,7 @@ public class TodoGetUseCase {
         final Map<Long, TodoNotification> todoNotificationMap =
             todoNotificationQueryService.findMapTodoIdKeyAndTodoNotificationValueByTodoIdsAndUserId(todoList, accessUser.getId());
 
-        final Map<Long, User> userMap = userQueryService.findMapWithUserIdKeyByIds(extractUserIds(assignList));
+        final Map<Long, User> userMap = userReader.findUserMapByIds(extractUserIds(assignList));
 
         final List<CategorySubTodoResponse> subTodoResponseList = todoList.stream()
             .map(todo -> {

@@ -1,8 +1,8 @@
 package com.pawith.userdomain.utils;
 
 import com.pawith.commonmodule.util.SecurityUtils;
-import com.pawith.userdomain.service.UserQueryService;
 import com.pawith.userdomain.entity.User;
+import com.pawith.userdomain.service.user.UserReader;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -12,11 +12,11 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class UserUtils {
 
-    private final UserQueryService userQueryService;
+    private final UserReader userReader;
 
     public User getAccessUser(){
         final Long userId = SecurityUtils.getAuthenticationPrincipal();
-        return userQueryService.findById(userId);
+        return userReader.findById(userId);
     }
 
     public Long getIdFromAccessUser(){

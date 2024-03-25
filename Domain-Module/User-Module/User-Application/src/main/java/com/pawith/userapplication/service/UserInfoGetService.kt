@@ -8,10 +8,10 @@ import com.pawith.userdomain.utils.UserUtils
 import org.springframework.transaction.annotation.Transactional
 
 @ApplicationService
-@Transactional
+@Transactional(readOnly = true)
 class UserInfoGetService (
-    val userUtils: UserUtils,
-    val userMapper: UserMapper
+    private val userUtils: UserUtils,
+    private val userMapper: UserMapper
 ){
 
     fun readUserInfo(): UserInfoResponse{
