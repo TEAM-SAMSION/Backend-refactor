@@ -1,75 +1,80 @@
-package com.pawith.commonmodule.utils;
+package com.pawith.commonmodule.utils
 
-import com.navercorp.fixturemonkey.FixtureMonkey;
-import com.navercorp.fixturemonkey.FixtureMonkeyBuilder;
-import com.navercorp.fixturemonkey.api.introspector.ConstructorPropertiesArbitraryIntrospector;
-import com.navercorp.fixturemonkey.api.introspector.FieldReflectionArbitraryIntrospector;
-import com.navercorp.fixturemonkey.api.jqwik.JavaTypeArbitraryGenerator;
-import com.navercorp.fixturemonkey.api.jqwik.JqwikPlugin;
-import net.jqwik.api.Arbitraries;
-import net.jqwik.api.arbitraries.IntegerArbitrary;
-import net.jqwik.api.arbitraries.LongArbitrary;
-import net.jqwik.api.arbitraries.StringArbitrary;
+import com.navercorp.fixturemonkey.FixtureMonkey
+import com.navercorp.fixturemonkey.FixtureMonkeyBuilder
+import com.navercorp.fixturemonkey.api.introspector.ConstructorPropertiesArbitraryIntrospector
+import com.navercorp.fixturemonkey.api.introspector.FieldReflectionArbitraryIntrospector
+import com.navercorp.fixturemonkey.api.jqwik.JavaTypeArbitraryGenerator
+import com.navercorp.fixturemonkey.api.jqwik.JqwikPlugin
+import com.navercorp.fixturemonkey.kotlin.KotlinPlugin
+import net.jqwik.api.Arbitraries
+import net.jqwik.api.arbitraries.IntegerArbitrary
+import net.jqwik.api.arbitraries.LongArbitrary
+import net.jqwik.api.arbitraries.StringArbitrary
 
-public class FixtureMonkeyUtils {
-    private FixtureMonkeyUtils() {
-    }
+class FixtureMonkeyUtils private constructor() {
+    companion object {
+        fun getKotlinBasedFixtureMonkey(): FixtureMonkey {
+            return FixtureMonkey.builder()
+                .defaultNotNull(true)
+                .plugin(KotlinPlugin())
+                .build()
+        }
 
-    private static final FixtureMonkey CONSTRUCT_BASED_FIXTURE_MONKEY = setupJavaType(FixtureMonkey.builder())
-        .objectIntrospector(ConstructorPropertiesArbitraryIntrospector.INSTANCE)
-        .defaultNotNull(true)
-        .build();
+        private val CONSTRUCT_BASED_FIXTURE_MONKEY: FixtureMonkey = setUpJavaType(FixtureMonkeyBuilder())
+            .objectIntrospector(ConstructorPropertiesArbitraryIntrospector.INSTANCE)
+            .defaultNotNull(true)
+            .build();
 
-    private static final FixtureMonkey BUILDER_BASED_FIXTURE_MONKEY = setupJavaType(FixtureMonkey.builder())
-        .objectIntrospector(ConstructorPropertiesArbitraryIntrospector.INSTANCE)
-        .defaultNotNull(true)
-        .build();
+        private val BUILDER_BASED_FIXTURE_MONKEY: FixtureMonkey = setUpJavaType(FixtureMonkey.builder())
+            .objectIntrospector(ConstructorPropertiesArbitraryIntrospector.INSTANCE)
+            .defaultNotNull(true)
+            .build()
 
-    private static final FixtureMonkey REFLECTION_BASED_FIXTURE_MONKEY = setupJavaType(FixtureMonkey.builder())
-        .objectIntrospector(FieldReflectionArbitraryIntrospector.INSTANCE)
-        .defaultNotNull(true)
-        .build();
+        private val REFLECTION_BASED_FIXTURE_MONKEY: FixtureMonkey = setUpJavaType(FixtureMonkey.builder())
+            .objectIntrospector(FieldReflectionArbitraryIntrospector.INSTANCE)
+            .defaultNotNull(true)
+            .build()
 
-    private static final FixtureMonkey JAVA_TYPE_BASED_FIXTURE_MONKEY = setupJavaType(FixtureMonkey.builder())
-        .defaultNotNull(true)
-        .build();
+        private val JAVA_TYPE_BASED_FIXTURE_MONKEY: FixtureMonkey = setUpJavaType(FixtureMonkey.builder())
+            .defaultNotNull(true)
+            .build()
 
-    public static FixtureMonkey getConstructBasedFixtureMonkey() {
-        return CONSTRUCT_BASED_FIXTURE_MONKEY;
-    }
-
-    public static FixtureMonkey getBuilderBasedFixtureMonkey() {
-        return BUILDER_BASED_FIXTURE_MONKEY;
-    }
-
-    public static FixtureMonkey getReflectionbasedFixtureMonkey() {
-        return REFLECTION_BASED_FIXTURE_MONKEY;
-    }
-
-    public static FixtureMonkey getJavaTypeBasedFixtureMonkey() {
-        return JAVA_TYPE_BASED_FIXTURE_MONKEY;
-    }
+        @JvmStatic
+        fun getConstructBasedFixtureMonkey(): FixtureMonkey {
+            return CONSTRUCT_BASED_FIXTURE_MONKEY
+        }
 
 
-    private static FixtureMonkeyBuilder setupJavaType(FixtureMonkeyBuilder builder){
-        return builder
-            .plugin(new JqwikPlugin()
-                .javaTypeArbitraryGenerator(new JavaTypeArbitraryGenerator() {
-                    @Override
-                    public StringArbitrary strings() {
-                        return Arbitraries.strings().alpha().numeric().ofMinLength(1).ofMaxLength(10);
-                    }
+        @JvmStatic
+        fun getReflectionBasedFixtureMonkey(): FixtureMonkey {
+            return REFLECTION_BASED_FIXTURE_MONKEY
+        }
 
-                    @Override
-                    public LongArbitrary longs() {
-                        return Arbitraries.longs().greaterOrEqual(1L);
-                    }
+        @JvmStatic
+        fun getJavaTypeBasedFixtureMonkey(): FixtureMonkey {
+            return JAVA_TYPE_BASED_FIXTURE_MONKEY
+        }
 
-                    @Override
-                    public IntegerArbitrary integers() {
-                        return Arbitraries.integers().greaterOrEqual(1);
-                    }
-                })
-            );
+
+        private fun setUpJavaType(builder: FixtureMonkeyBuilder): FixtureMonkeyBuilder {
+            return builder
+                .plugin(
+                    JqwikPlugin()
+                        .javaTypeArbitraryGenerator(object : JavaTypeArbitraryGenerator {
+                            override fun strings(): StringArbitrary {
+                                return Arbitraries.strings().alpha().numeric().ofMinLength(1).ofMaxLength(10)
+                            }
+
+                            override fun longs(): LongArbitrary {
+                                return Arbitraries.longs().greaterOrEqual(1L)
+                            }
+
+                            override fun integers(): IntegerArbitrary {
+                                return Arbitraries.integers().greaterOrEqual(1)
+                            }
+                        })
+                )
+        }
     }
 }
