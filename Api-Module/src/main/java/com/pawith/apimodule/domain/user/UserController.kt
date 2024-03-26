@@ -1,4 +1,4 @@
-package com.pawith.userpresentation
+package com.pawith.apimodule.domain.user
 
 import com.pawith.userapplication.dto.request.PathHistoryCreateRequest
 import com.pawith.userapplication.dto.request.UserNicknameModifyRequest
@@ -49,7 +49,7 @@ class UserController(
     fun deleteUser() = userDeleteService.deleteUser()
 
     @GetMapping("/term")
-    fun getTerm() = userInfoGetService.getUserInfo()
+    fun getTerm() = userInfoGetService.getUserJoinTerm()
 
     @PostMapping("/withdraw")
     fun postWithdrawReason(
