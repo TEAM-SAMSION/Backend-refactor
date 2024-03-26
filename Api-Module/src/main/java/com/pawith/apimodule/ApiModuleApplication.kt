@@ -1,16 +1,13 @@
-package com.pawith.apimodule;
+package com.pawith.apimodule
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration;
-import org.springframework.context.annotation.ComponentScan;
+import org.springframework.boot.autoconfigure.SpringBootApplication
+import org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration
+import org.springframework.boot.runApplication
 
-@SpringBootApplication(exclude = {UserDetailsServiceAutoConfiguration.class })
-@ComponentScan(basePackages = "com.pawith")
-public class ApiModuleApplication {
+@SpringBootApplication(exclude = [UserDetailsServiceAutoConfiguration::class])
+class ApiModuleApplication {
+}
 
-    public static void main(String[] args) {
-        SpringApplication.run(ApiModuleApplication.class, args);
-    }
-
+fun main(args: Array<String>) {
+    runApplication<ApiModuleApplication>(*args)
 }
