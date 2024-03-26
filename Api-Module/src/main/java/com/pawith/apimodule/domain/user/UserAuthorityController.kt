@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 @RequestMapping("/user")
 class UserAuthorityController (
-    val userAuthorityGetUService: UserAuthorityGetService,
+    private val userAuthorityGetUService: UserAuthorityGetService,
 ){
 
     @GetMapping("/authority")
