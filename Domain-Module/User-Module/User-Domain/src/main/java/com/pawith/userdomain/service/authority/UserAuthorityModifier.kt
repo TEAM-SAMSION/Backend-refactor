@@ -9,8 +9,10 @@ class UserAuthorityModifier(
     private val userAuthorityRepository: UserAuthorityRepository
 ) {
 
-    fun modifyAuthorityGuestToUser(userAuthority: UserAuthority){
-        userAuthority.changeUserAuthority()
-        userAuthorityRepository.save(userAuthority)
+    fun modifyAuthorityGuestToUser(userId: Long){
+        userAuthorityRepository.findByUserId(userId)?.let{
+            it.changeUserAuthority()
+            userAuthorityRepository.save(it)
+        }
     }
 }

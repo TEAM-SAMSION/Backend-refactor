@@ -11,7 +11,10 @@ class UserAuthorityAppender(
 ) {
 
     fun appendAuthority(user: User) {
-        userAuthorityRepository.findByUserId(user.id)?.initialUserAuthority() ?: {
+        userAuthorityRepository.findByUserId(user.id)?.let{
+            it.changeUserAuthority()
+            userAuthorityRepository.save(it)
+        } ?: {
             userAuthorityRepository.save(UserAuthority.of(user))
         }
     }
