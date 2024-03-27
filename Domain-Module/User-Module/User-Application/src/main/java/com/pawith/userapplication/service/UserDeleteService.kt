@@ -2,8 +2,8 @@ package com.pawith.userapplication.service
 
 import com.pawith.commonmodule.annotation.ApplicationService
 import com.pawith.commonmodule.event.UserAccountDeleteEvent
-import com.pawith.userdomain.service.user.UserRemover
-import com.pawith.userdomain.utils.UserUtils
+import com.pawith.userdomain.UserUtils
+import com.pawith.userdomain.service.UserRemover
 import org.springframework.context.ApplicationEventPublisher
 import org.springframework.transaction.annotation.Transactional
 
@@ -16,7 +16,7 @@ class UserDeleteService(
 ) {
 
     fun deleteUser() {
-        val userId = userUtils.idFromAccessUser
+        val userId = userUtils.getIdFromAccessUser()
         userRemover.removeUser(userId)
         applicationEventPublisher.publishEvent(UserAccountDeleteEvent(userId))
     }

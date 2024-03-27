@@ -2,8 +2,8 @@ package com.pawith.userapplication.service
 
 import com.pawith.commonmodule.annotation.ApplicationService
 import com.pawith.imagemodule.service.ImageUploadService
-import com.pawith.userdomain.service.user.UserModifier
-import com.pawith.userdomain.utils.UserUtils
+import com.pawith.userdomain.UserUtils
+import com.pawith.userdomain.service.UserModifier
 import org.springframework.transaction.annotation.Transactional
 import org.springframework.web.multipart.MultipartFile
 
@@ -17,7 +17,7 @@ class UserProfileImageUpdateService (
 
     fun updateUserProfileImage(image: MultipartFile){
         userModifier.modifyProfileImage(
-            userUtils.idFromAccessUser,
+            userUtils.getIdFromAccessUser(),
             imageUploadService.uploadImg(image)
         )
     }
