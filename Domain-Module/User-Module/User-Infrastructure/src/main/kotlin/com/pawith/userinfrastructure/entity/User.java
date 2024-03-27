@@ -1,4 +1,4 @@
-package com.pawith.userdomain.entity;
+package com.pawith.userinfrastructure.entity;
 
 import com.pawith.commonmodule.domain.BaseEntity;
 import com.pawith.commonmodule.enums.Provider;

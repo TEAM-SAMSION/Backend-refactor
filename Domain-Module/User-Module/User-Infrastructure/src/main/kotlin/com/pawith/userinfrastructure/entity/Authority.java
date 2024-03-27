@@ -1,4 +1,4 @@
-package com.pawith.userdomain.entity;
+package com.pawith.userinfrastructure.entity;
 
 public enum Authority {
     GUEST, USER, ADMIN

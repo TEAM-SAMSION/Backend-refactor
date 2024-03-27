@@ -9,6 +9,7 @@ include ("Domain-Module")
 include ("Domain-Module:User-Module")
 include ("Domain-Module:User-Module:User-Domain")
 include ("Domain-Module:User-Module:User-Application")
+include ("Domain-Module:User-Module:User-Infrastructure")
 
 
 include ("Domain-Module:Todo-Module")
