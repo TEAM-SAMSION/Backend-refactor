@@ -1,18 +1,17 @@
-package com.pawith.userdomain.service.user
+package com.pawith.userdomain.service
 
 import com.pawith.commonmodule.annotation.DomainService
-import com.pawith.userdomain.entity.User
+import com.pawith.userdomain.User
 import com.pawith.userdomain.exception.UserError
 import com.pawith.userdomain.exception.UserNotFoundException
 import com.pawith.userdomain.repository.UserRepository
-import org.springframework.data.repository.findByIdOrNull
 
 @DomainService
 class UserReader(
     private val userRepository: UserRepository
 ) {
     fun readByEmail(email: String): User {
-        return readUser { userRepository.findByEmail(email) }
+        return readUser { userRepository.findByEmailOrNull(email) }
     }
 
     fun readByUserId(userId: Long): User {
@@ -20,7 +19,7 @@ class UserReader(
     }
 
     fun readUsersMapByIds(userIds: List<Long>) : Map<Long, User> {
-        return userRepository.findAllByIds(userIds).associateBy { it.id }
+        return userRepository.findAllByIds(userIds).associateBy { it.id!! }
     }
 
     fun readAllByNicknameAndUserIds(nickname: String, userIds: List<Long>) : List<User>{

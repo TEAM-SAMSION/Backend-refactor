@@ -1,4 +1,4 @@
-package com.pawith.userdomain.service.user
+package com.pawith.userdomain.service
 
 import com.pawith.commonmodule.annotation.DomainService
 import com.pawith.userdomain.repository.UserRepository

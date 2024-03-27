@@ -1,4 +1,4 @@
-package com.pawith.userdomain.service.user
+package com.pawith.userdomain.service
 
 import com.pawith.commonmodule.annotation.DomainService
 import com.pawith.commonmodule.enums.Provider
@@ -8,13 +8,12 @@ import com.pawith.userdomain.repository.UserRepository
 
 @DomainService
 class UserValidator(
-    private val userRepository: UserRepository,
-    private val userReader: UserReader
+    private val userRepository: UserRepository
 ) {
 
     fun validateUserAlreadyExist(email :String, provider: Provider){
-        userRepository.findByEmail(email)?.let {
-            if(it.isMatchingProvider(provider)){
+        userRepository.findByEmailOrNull(email)?.let {
+            if(it.isProviderMatching(provider)){
                 throw AccountAlreadyExistException(UserError.ACCOUNT_ALREADY_EXIST)
             }
         }

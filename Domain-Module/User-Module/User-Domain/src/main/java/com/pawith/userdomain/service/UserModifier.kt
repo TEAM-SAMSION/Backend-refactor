@@ -1,9 +1,7 @@
-package com.pawith.userdomain.service.user
+package com.pawith.userdomain.service
 
 import com.pawith.commonmodule.annotation.DomainService
-import com.pawith.userdomain.entity.User
 import com.pawith.userdomain.repository.UserRepository
-import org.springframework.data.repository.findByIdOrNull
 
 @DomainService
 class UserModifier(
@@ -11,15 +9,22 @@ class UserModifier(
 ) {
     fun modifyNickname(userId: Long, newNickname: String){
         userRepository.findByIdOrNull(userId)?.let {
-            it.updateNickname(newNickname)
-            userRepository.save(it)
+            it.changeNickname(newNickname)
+            userRepository.update(it)
         }
     }
 
     fun modifyProfileImage(userId: Long, newProfileImage: String){
         userRepository.findByIdOrNull(userId)?.let {
-            it.updateProfileImage(newProfileImage)
-            userRepository.save(it)
+            it.changeProfileImage(newProfileImage)
+            userRepository.update(it)
+        }
+    }
+
+    fun modifyUserAuthorityToUser(userId: Long){
+        userRepository.findByIdOrNull(userId)?.let {
+            it.changeUserAuthorityGuestToUser()
+            userRepository.update(it)
         }
     }
 }
