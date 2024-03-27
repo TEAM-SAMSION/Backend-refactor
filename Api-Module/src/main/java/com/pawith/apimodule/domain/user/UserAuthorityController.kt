@@ -1,4 +1,4 @@
-package com.pawith.userpresentation
+package com.pawith.apimodule.domain.user
 
 import com.pawith.userapplication.dto.response.UserAuthorityInfoResponse
 import com.pawith.userapplication.service.UserAuthorityGetService
@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 @RequestMapping("/user")
 class UserAuthorityController (
-    val userAuthorityGetUService: UserAuthorityGetService,
+    private val userAuthorityGetUService: UserAuthorityGetService,
 ){
 
     @GetMapping("/authority")

@@ -1,28 +1,21 @@
-package com.pawith.userpresentation
+package com.pawith.apimodule.domain.user
 
 import com.pawith.userapplication.dto.request.PathHistoryCreateRequest
 import com.pawith.userapplication.dto.request.UserNicknameModifyRequest
 import com.pawith.userapplication.dto.request.WithdrawReasonCreateRequest
 import com.pawith.userapplication.service.*
-import org.springframework.web.bind.annotation.DeleteMapping
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.PutMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RequestPart
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 import org.springframework.web.multipart.MultipartFile
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/users")
 class UserController(
-    val userNicknameChangeService: UserNicknameChangeService,
-    val userInfoGetService: UserInfoGetService,
-    val userProfileImageUpdateService: UserProfileImageUpdateService,
-    val pathHistoryCreateService: PathHistoryCreateService,
-    val userDeleteService: UserDeleteService,
-    val withdrawReasonCreateService: WithdrawReasonCreateService
+    private val userNicknameChangeService: UserNicknameChangeService,
+    private val userInfoGetService: UserInfoGetService,
+    private val userProfileImageUpdateService: UserProfileImageUpdateService,
+    private val pathHistoryCreateService: PathHistoryCreateService,
+    private val userDeleteService: UserDeleteService,
+    private val withdrawReasonCreateService: WithdrawReasonCreateService
 ) {
 
     @PutMapping("/name")
@@ -49,7 +42,7 @@ class UserController(
     fun deleteUser() = userDeleteService.deleteUser()
 
     @GetMapping("/term")
-    fun getTerm() = userInfoGetService.getUserInfo()
+    fun getTerm() = userInfoGetService.getUserJoinTerm()
 
     @PostMapping("/withdraw")
     fun postWithdrawReason(

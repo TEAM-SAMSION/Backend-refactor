@@ -1,5 +1,4 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-import org.springframework.boot.gradle.tasks.bundling.BootJar
 
 plugins {
     id("java-library")
@@ -24,6 +23,7 @@ plugins {
 allprojects {
     group = "com.pawith"
     version = "0.0.1"
+    val kotestVersion = "5.8.0"
 
     repositories {
         mavenCentral()
@@ -37,9 +37,6 @@ allprojects {
         plugin("org.jetbrains.kotlin.plugin.lombok")
         plugin("org.jetbrains.kotlin.plugin.jpa")
 
-
-
-
         plugin("org.springframework.boot")
         plugin("io.spring.dependency-management")
 
@@ -49,6 +46,8 @@ allprojects {
         plugin("io.freefair.lombok")
 
         from("$rootDir/gradle/customplugin/gradleutils.gradle.kts")
+        from("$rootDir/gradle/spring.gradle.kts")
+        from("$rootDir/gradle/test.gradle.kts")
     }
 
     springBoot {
@@ -91,33 +90,23 @@ allprojects {
 
 
     dependencies {
-        implementation("org.springframework.boot:spring-boot-starter-web")
-        // jpa
-        implementation("org.springframework.boot:spring-boot-starter-data-jpa")
-        runtimeOnly("com.mysql:mysql-connector-j")
-
         // retryable
         implementation("org.springframework.retry:spring-retry")
 
-        // modulith
-        implementation("org.springframework.modulith:spring-modulith-starter-core")
-        runtimeOnly("org.springframework.modulith:spring-modulith-runtime")
-        testImplementation("org.springframework.modulith:spring-modulith-starter-test")
+
 
         //AWS S3
         implementation("org.springframework.cloud:spring-cloud-starter-aws:2.2.6.RELEASE")
 
-        // Fixture testing tool
-        testImplementation("com.navercorp.fixturemonkey:fixture-monkey-starter:1.0.0")
-        testFixturesImplementation("com.navercorp.fixturemonkey:fixture-monkey-starter:1.0.0")
+        // kotlin json serial/deserial
+        implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 
-        // mvc
-        implementation("org.springframework.boot:spring-boot-starter-test")
-        testFixturesImplementation("org.springframework.boot:spring-boot-starter-test")
+
 
         // restdocs
         asciidoctorExt("org.springframework.restdocs:spring-restdocs-asciidoctor")
         implementation("org.springframework.restdocs:spring-restdocs-mockmvc")
+        testImplementation("org.springframework.restdocs:spring-restdocs-mockmvc")
         testFixturesImplementation("org.springframework.restdocs:spring-restdocs-mockmvc")
 
         // lombok
@@ -156,18 +145,17 @@ allprojects {
         implementation("com.querydsl:querydsl-jpa:5.0.0:jakarta")
         kapt("com.querydsl:querydsl-apt:5.0.0:jakarta")
 
-
-//        implementation("org.jetbrains.kotlin:kotlin-reflect")
-
-
+        testImplementation("io.kotest:kotest-runner-junit5:$kotestVersion")
+        testImplementation("io.kotest:kotest-assertions-core:$kotestVersion")
     }
-
 
     dependencyManagement {
         imports {
             mavenBom("org.springframework.modulith:spring-modulith-bom:1.0.2")
         }
     }
+
+
 
 //    tasks.named("bootBuildImage") {
 //        builder = 'paketobuildpacks/builder-jammy-base:latest'
@@ -218,3 +206,4 @@ allprojects {
 //    }
 
 }
+

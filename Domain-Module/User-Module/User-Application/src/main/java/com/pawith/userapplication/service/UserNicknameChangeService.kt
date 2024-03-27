@@ -12,15 +12,13 @@ import org.springframework.transaction.annotation.Transactional
 @Transactional
 class UserNicknameChangeService (
     private val userUtils: UserUtils,
-    private val userAuthorityReader: UserAuthorityReader,
     private val userModifier: UserModifier,
     private val userAuthorityModifier: UserAuthorityModifier
 ){
 
     fun changeUserNickname(request: UserNicknameModifyRequest){
-        val user = userUtils.accessUser
-        userModifier.modifyNickname(user, request.nickname)
-        val userAuthority = userAuthorityReader.readByUserId(user.id)
-        userAuthorityModifier.modifyAuthorityGuestToUser(userAuthority)
+        val userId = userUtils.idFromAccessUser
+        userModifier.modifyNickname(userId, request.nickname)
+        userAuthorityModifier.modifyAuthorityGuestToUser(userId)
     }
 }
