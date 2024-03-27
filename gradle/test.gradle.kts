@@ -4,7 +4,7 @@ dependencies {
     // Fixture testing tool
     "testImplementation"("com.navercorp.fixturemonkey:fixture-monkey-starter-kotlin:1.0.14")
     "testFixturesImplementation"("com.navercorp.fixturemonkey:fixture-monkey-starter-kotlin:1.0.14")
-//    "testImplementation"("com.navercorp.fixturemonkey:fixture-monkey-kotlin:1.0.14")
+    "testImplementation"("io.kotest.extensions:kotest-extensions-spring:1.1.3")
 
     // mvc
     "implementation"("org.springframework.boot:spring-boot-starter-test")
