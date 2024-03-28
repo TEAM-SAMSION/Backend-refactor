@@ -1,7 +1,7 @@
 package com.pawith.userdomain.service
 
 import com.pawith.commonmodule.annotation.DomainService
-import com.pawith.userdomain.entity.PathHistory
+import com.pawith.userdomain.PathHistory
 import com.pawith.userdomain.repository.PathHistoryRepository
 
 @DomainService

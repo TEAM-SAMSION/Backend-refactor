@@ -2,8 +2,7 @@ package com.pawith.userapplication.handler
 
 import com.pawith.commonmodule.event.UserSignUpEvent
 import com.pawith.userapplication.mapper.UserMapper
-import com.pawith.userdomain.service.authority.UserAuthorityAppender
-import com.pawith.userdomain.service.user.UserAppender
+import com.pawith.userdomain.service.UserAppender
 import org.springframework.context.event.EventListener
 import org.springframework.stereotype.Component
 import org.springframework.transaction.annotation.Transactional
@@ -12,7 +11,6 @@ import org.springframework.transaction.annotation.Transactional
 @Transactional
 class UserSignUpHandler(
     private val userAppender: UserAppender,
-    private val userAuthorityAppender: UserAuthorityAppender,
     private val userMapper: UserMapper
 ) {
 
@@ -20,12 +18,10 @@ class UserSignUpHandler(
         const val DEFAULT_PROFILE_IMAGE_URL: String = "https://pawith.s3.ap-northeast-2.amazonaws.com/base-image/default_user.png"
     }
 
-
     @EventListener
     fun signUp(userSignUpEvent: UserSignUpEvent){
         val user = userMapper.toUserEntity(userSignUpEvent, DEFAULT_PROFILE_IMAGE_URL)
         userAppender.appendUser(user)
-        userAuthorityAppender.appendAuthority(user)
     }
 
 }

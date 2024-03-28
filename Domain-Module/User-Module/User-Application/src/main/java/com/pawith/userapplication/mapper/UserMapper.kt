@@ -3,17 +3,18 @@ package com.pawith.userapplication.mapper
 import com.pawith.commonmodule.annotation.Mapper
 import com.pawith.commonmodule.event.UserSignUpEvent
 import com.pawith.userapplication.dto.response.UserInfoResponse
-import com.pawith.userdomain.entity.User
+import com.pawith.userdomain.User
+import com.pawith.userdomain.UserAuthority
 
 @Mapper
 class UserMapper {
 
     fun toUserEntity(event: UserSignUpEvent, imageUrl: String): User {
-        return User(
-            event.nickname,
-            event.email,
-            imageUrl,
-            null
+        return User.createNewUser(
+            nickname = event.nickname,
+            email = event.email,
+            imageUrl=imageUrl,
+            userAuthority = UserAuthority.createGuestAuthority()
         )
     }
 

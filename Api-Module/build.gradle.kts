@@ -26,4 +26,8 @@ dependencies {
         implementation(project(module.path))
     }
 
+    getProjectsEndsWith("Domain-Module", "Infrastructure").forEach { module ->
+        implementation(project(module.path))
+    }
+
 }
