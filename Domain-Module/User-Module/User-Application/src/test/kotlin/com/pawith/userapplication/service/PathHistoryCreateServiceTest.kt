@@ -19,7 +19,7 @@ class PathHistoryCreateServiceTest : BehaviorSpec({
 
     given("가입 경로 생성 요청이"){
         val pathHistoryCreateRequest : PathHistoryCreateRequest = FixtureMonkeyUtils.getKotlinBasedFixtureMonkey().giveMeOne()
-        val pathHistory: PathHistory = FixtureMonkeyUtils.getReflectionBasedFixtureMonkey().giveMeOne()
+        val pathHistory: PathHistory = FixtureMonkeyUtils.getKotlinBasedFixtureMonkey().giveMeOne()
         every { pathHistoryMapper.toPathHistoryEntity(pathHistoryCreateRequest)} returns pathHistory
         `when`("정상으로 들어오면"){
             pathHistoryCreateService.createPathHistory(pathHistoryCreateRequest)
