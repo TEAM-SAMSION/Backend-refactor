@@ -12,25 +12,10 @@ class User(
     var imageUrl: String,
     var provider: Provider?,
     var userAuthority: UserAuthority,
+    var isDeleted: Boolean = false,
     createdDate: LocalDateTime,
     updatedDate: LocalDateTime
 ) : BaseDomain(createdDate, updatedDate) {
-
-    private constructor(
-        nickname: String,
-        email: String,
-        imageUrl: String,
-        userAuthority: UserAuthority,
-    ) : this(
-        id = 0,
-        nickname = nickname,
-        email = email,
-        imageUrl = imageUrl,
-        provider = null,
-        userAuthority = userAuthority,
-        createdDate = LocalDateTime.now(),
-        updatedDate = LocalDateTime.now(),
-    )
 
     companion object {
         fun createNewUser(
@@ -39,10 +24,14 @@ class User(
             imageUrl: String,
             userAuthority: UserAuthority
         ) = User(
+            id=null,
             nickname = nickname,
             email = email,
             imageUrl = imageUrl,
-            userAuthority = userAuthority
+            provider = null,
+            userAuthority = userAuthority,
+            createdDate = LocalDateTime.now(),
+            updatedDate = LocalDateTime.now()
         )
     }
 
@@ -69,6 +58,7 @@ class User(
     fun changeUserAuthorityGuestToUser() {
         if (userAuthority.isGuest()) {
             this.userAuthority = UserAuthority.createUserAuthority()
+            updateModifiedDateToCurrent()
         }
     }
 }
