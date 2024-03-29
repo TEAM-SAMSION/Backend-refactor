@@ -1,4 +1,4 @@
-package com.petmory.apimodule;
+package com.pawith;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.modulith.core.ApplicationModules;
