@@ -3,7 +3,6 @@ package com.pawith.userdomain
 class UserAuthority(
     val authority: Authority,
 ) {
-
     companion object{
         fun createUserAuthority() : UserAuthority{
             return UserAuthority(Authority.USER)

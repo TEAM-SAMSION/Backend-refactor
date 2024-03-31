@@ -10,9 +10,7 @@ class PathHistory(
     updatedDate: LocalDateTime
 ) : BaseDomain(createdDate, updatedDate){
 
-    private constructor(path: String):this(0, path, LocalDateTime.now(), LocalDateTime.now())
-
     companion object{
-        fun createNewPath(path: String) = PathHistory(path)
+        fun createNewPath(path: String) = PathHistory(null, path, LocalDateTime.now(), LocalDateTime.now())
     }
 }

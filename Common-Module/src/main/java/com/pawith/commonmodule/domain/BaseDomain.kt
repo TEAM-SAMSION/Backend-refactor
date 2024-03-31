@@ -6,7 +6,7 @@ abstract class BaseDomain(
     val createdDate: LocalDateTime,
     var updatedDate: LocalDateTime
 ) {
-    fun updateModifiedDateToCurrent() {
+    protected fun updateModifiedDateToCurrent() {
         this.updatedDate = LocalDateTime.now()
     }
 }
