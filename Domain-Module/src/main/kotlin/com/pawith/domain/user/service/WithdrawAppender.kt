@@ -1,8 +1,8 @@
 package com.pawith.domain.user.service
 
 import com.pawith.commonmodule.annotation.DomainService
-import com.pawith.userdomain.WithdrawReason
-import com.pawith.userdomain.repository.WithdrawReasonRepository
+import com.pawith.domain.user.WithdrawReason
+import com.pawith.domain.user.repository.WithdrawReasonRepository
 
 @DomainService
 class WithdrawAppender(

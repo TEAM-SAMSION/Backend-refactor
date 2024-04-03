@@ -2,10 +2,9 @@ package com.pawith.domain.user.service
 
 import com.pawith.commonmodule.annotation.DomainService
 import com.pawith.commonmodule.enums.Provider
-import com.pawith.userdomain.exception.AccountAlreadyExistException
-import com.pawith.userdomain.exception.UserError
-import com.pawith.userdomain.repository.UserRepository
-
+import com.pawith.domain.user.exception.AccountAlreadyExistException
+import com.pawith.domain.user.exception.UserError
+import com.pawith.domain.user.repository.UserRepository
 @DomainService
 class UserValidator(
     private val userRepository: UserRepository

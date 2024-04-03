@@ -1,10 +1,10 @@
 package com.pawith.domain.user.service
 
 import com.pawith.commonmodule.annotation.DomainService
-import com.pawith.userdomain.User
-import com.pawith.userdomain.exception.UserError
-import com.pawith.userdomain.exception.UserNotFoundException
-import com.pawith.userdomain.repository.UserRepository
+import com.pawith.domain.user.User
+import com.pawith.domain.user.exception.UserError
+import com.pawith.domain.user.exception.UserNotFoundException
+import com.pawith.domain.user.repository.UserRepository
 
 @DomainService
 class UserReader(

@@ -1,7 +1,7 @@
 package com.pawith.domain.user
 
 import com.pawith.commonmodule.util.SecurityUtils
-import com.pawith.userdomain.service.UserReader
+import com.pawith.domain.user.service.UserReader
 import org.springframework.stereotype.Component
 
 @Component
