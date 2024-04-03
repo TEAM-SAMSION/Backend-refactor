@@ -6,7 +6,7 @@ import com.pawith.commonmodule.event.NotificationEvent;
 import com.pawith.commonmodule.schedule.AbstractBatchSchedulingHandler;
 import com.pawith.tododomain.repository.RegisterRepository;
 import com.pawith.tododomain.repository.dao.IncompleteTodoCountInfoDao;
-import com.pawith.userdomain.service.user.UserReader;
+import com.pawith.domain.service.UserReader;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.data.domain.Pageable;

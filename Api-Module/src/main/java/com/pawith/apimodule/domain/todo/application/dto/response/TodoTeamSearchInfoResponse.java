@@ -1,0 +1,18 @@
+package com.pawith.apimodule.domain.todo.application.dto.response;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+
+@Getter
+@Builder
+@AllArgsConstructor
+public class TodoTeamSearchInfoResponse {
+    private final String code;
+    private final Long teamId;
+    private final String teamName;
+    private final String presidentName;
+    private final Integer registerCount;
+    private final String description;
+    private final String teamImageUrl;
+}

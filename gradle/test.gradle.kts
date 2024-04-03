@@ -1,4 +1,5 @@
 
+val kotestVersion = "5.8.0"
 
 dependencies {
     // Fixture testing tool
@@ -16,5 +17,11 @@ dependencies {
     "implementation"("org.springframework.modulith:spring-modulith-starter-core")
     "runtimeOnly"("org.springframework.modulith:spring-modulith-runtime")
     "testImplementation"("org.springframework.modulith:spring-modulith-starter-test")
+
+
+    "testImplementation"("io.kotest:kotest-runner-junit5:$kotestVersion")
+    "testImplementation"("io.kotest:kotest-assertions-core:$kotestVersion")
+    "testImplementation"("io.mockk:mockk:1.13.10")
+    "testImplementation"("io.kotest.extensions:kotest-extensions-spring:1.1.3")
 }
 

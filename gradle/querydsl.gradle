@@ -5,17 +5,6 @@ subprojects {
         }
     }
 
-    configurations {
-        compileOnly {
-            extendsFrom annotationProcessor
-        }
-//        querydsl.extendsFrom compileClasspath
-    }
-
-    repositories {
-        mavenCentral()
-    }
-
     dependencies {
         //querydsl 설정 추가
         implementation 'com.querydsl:querydsl-jpa:5.0.0:jakarta'

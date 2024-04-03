@@ -6,8 +6,9 @@ include ("Log-Module")
 
 include ("Domain-Module")
 
+include("Infra-Module")
+
 include ("Domain-Module:User-Module")
-include ("Domain-Module:User-Module:User-Domain")
 include ("Domain-Module:User-Module:User-Application")
 include ("Domain-Module:User-Module:User-Infrastructure")
 
