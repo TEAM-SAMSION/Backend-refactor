@@ -3,26 +3,8 @@ rootProject.name = "pawith"
 include ("Api-Module")
 
 include ("Log-Module")
-
 include ("Domain-Module")
-
 include("Infra-Module")
-
-include ("Domain-Module:User-Module")
-include ("Domain-Module:User-Module:User-Application")
-include ("Domain-Module:User-Module:User-Infrastructure")
-
-
-include ("Domain-Module:Todo-Module")
-include ("Domain-Module:Todo-Module:Todo-Domain")
-include ("Domain-Module:Todo-Module:Todo-Application")
-include ("Domain-Module:Todo-Module:Todo-Presentation")
-include ("Domain-Module:Todo-Module:Todo-Infrastructure")
-include ("Domain-Module:Auth-Module")
-include ("Domain-Module:Auth-Module:Auth-Presentation")
-include ("Domain-Module:Auth-Module:Auth-Application")
-include ("Domain-Module:Auth-Module:Auth-Domain")
-
 
 include ("Common-Module")
 include ("Image-Module")
