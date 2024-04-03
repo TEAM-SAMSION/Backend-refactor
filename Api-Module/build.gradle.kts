@@ -1,12 +1,3 @@
-//apply(from = "$rootDir/gradle/customplugin/gradleutils.gradle.kts")
-
-fun getProjectsEndsWith(rootModuleName: String, endsWithModuleName: String): Collection<Project> {
-    return project(":$rootModuleName").allprojects.stream()
-        .filter { project -> project.name.endsWith(endsWithModuleName) }
-        .toList()
-}
-
-
 dependencies {
     // actuators
     implementation("org.springframework.boot:spring-boot-starter-actuator")
@@ -21,13 +12,8 @@ dependencies {
     testImplementation(testFixtures(project(":Common-Module")))
 
     implementation(project(":Batch-Module"))
-
-    getProjectsEndsWith("Domain-Module", "Application").forEach { module ->
-        implementation(project(module.path))
-    }
-
-    getProjectsEndsWith("Domain-Module", "Infrastructure").forEach { module ->
-        implementation(project(module.path))
-    }
+    implementation(project(":Domain-Module"))
+    implementation(project(":Infra-Module"))
+    implementation(project(":Image-Module"))
 
 }

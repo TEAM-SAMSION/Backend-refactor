@@ -23,7 +23,7 @@ plugins {
 allprojects {
     group = "com.pawith"
     version = "0.0.1"
-    val kotestVersion = "5.8.0"
+
 
     repositories {
         mavenCentral()
@@ -56,19 +56,8 @@ allprojects {
 
 
     val asciidoctorExt = configurations.create("asciidoctorExt")
-
-//    val jar: Jar by tasks
-//    val bootJar: BootJar by tasks
-//
-//    bootJar.enabled = false
-//    jar.enabled = true
-//
-//    if (name == "Api-Module") {
-//        tasks.getByName<BootJar>("bootJar") {
-//            enabled = true
-//        }
-//    }
-
+    // Querydsl 설정부 추가 - start
+    val generated = file("${buildDir}src/main/generated")
 
     tasks.withType<JavaCompile> {
         sourceCompatibility = "17"
@@ -84,7 +73,7 @@ allprojects {
 
     kapt {
         keepJavacAnnotationProcessors = true
-        showProcessorStats = true
+
     }
 
 
@@ -142,13 +131,13 @@ allprojects {
         implementation("org.springframework.boot:spring-boot-starter-aop")
 
         // querydsl
-        implementation("com.querydsl:querydsl-jpa:5.0.0:jakarta")
-        kapt("com.querydsl:querydsl-apt:5.0.0:jakarta")
+        implementation("com.querydsl:querydsl-jpa:5.1.0:jakarta")
+        kapt("com.querydsl:querydsl-apt:5.1.0:jakarta")
+        kapt("jakarta.annotation:jakarta.annotation-api")
+        kapt("jakarta.persistence:jakarta.persistence-api")
 
-        testImplementation("io.kotest:kotest-runner-junit5:$kotestVersion")
-        testImplementation("io.kotest:kotest-assertions-core:$kotestVersion")
-        testImplementation("io.mockk:mockk:1.13.10")
-        testImplementation("io.kotest.extensions:kotest-extensions-spring:1.1.3")
+
+
     }
 
     dependencyManagement {
@@ -157,11 +146,6 @@ allprojects {
         }
     }
 
-
-
-//    tasks.named("bootBuildImage") {
-//        builder = 'paketobuildpacks/builder-jammy-base:latest'
-//    }
 
     // RestDocs 설정
 
@@ -206,6 +190,31 @@ allprojects {
 //            into file("src/main/resources/static/docs")
 //        }
 //    }
+
+
+
+    // querydsl QClass 파일 생성 위치를 지정
+    tasks.withType<JavaCompile> {
+        options.generatedSourceOutputDirectory.set(generated)
+    }
+
+    // kotlin source set 에 querydsl QClass 위치 추가
+    sourceSets {
+        main {
+            kotlin.srcDirs += generated
+        }
+    }
+
+    // gradle clean 시에 QClass 디렉토리 삭제
+    tasks.named("clean") {
+        doLast {
+            generated.deleteRecursively()
+        }
+    }
+
+    kapt{
+        generateStubs = true
+    }
 
 }
 

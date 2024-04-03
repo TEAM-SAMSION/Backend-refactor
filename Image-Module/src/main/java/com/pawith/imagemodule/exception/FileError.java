@@ -1,10 +1,10 @@
 package com.pawith.imagemodule.exception;
 
-import com.pawith.commonmodule.exception.Error;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
+import com.pawith.commonmodule.exception.Error;
 
 @Getter
 @RequiredArgsConstructor

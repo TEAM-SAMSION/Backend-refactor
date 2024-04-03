@@ -1,8 +1,8 @@
 package com.pawith.alarmmodule.controller;
 
 import com.pawith.alarmmodule.service.AlarmService;
-import com.pawith.alarmmodule.service.dto.response.UnReadAlarmResponse;
 import com.pawith.alarmmodule.service.dto.response.AlarmInfoResponse;
+import com.pawith.alarmmodule.service.dto.response.UnReadAlarmResponse;
 import com.pawith.commonmodule.BaseRestDocsTest;
 import com.pawith.commonmodule.response.SliceResponse;
 import com.pawith.commonmodule.utils.FixtureMonkeyUtils;
@@ -23,8 +23,10 @@ import java.util.List;
 import static org.mockito.BDDMockito.given;
 import static org.springframework.restdocs.headers.HeaderDocumentation.headerWithName;
 import static org.springframework.restdocs.headers.HeaderDocumentation.requestHeaders;
-import static org.springframework.restdocs.payload.PayloadDocumentation.*;
-import static org.springframework.restdocs.request.RequestDocumentation.*;
+import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
+import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
+import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
+import static org.springframework.restdocs.request.RequestDocumentation.queryParameters;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 

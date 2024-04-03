@@ -6,7 +6,7 @@ import com.pawith.alarmmodule.repository.AlarmRepository;
 import com.pawith.alarmmodule.service.dto.response.AlarmInfoResponse;
 import com.pawith.alarmmodule.service.dto.response.UnReadAlarmResponse;
 import com.pawith.commonmodule.response.SliceResponse;
-import com.pawith.userdomain.utils.UserUtils;
+import com.pawith.domain.UserUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
@@ -36,7 +36,7 @@ public class AlarmService {
                 .title(alarm.getAlarmCategory())
                 .message(alarm.getAlarmBody().getMessage())
                 .isRead(alarm.getIsRead())
-                .createdAt(alarm.getCreatedAt())
+                .createdAt(alarm.getCreatedDate())
                 .build());
         return SliceResponse.from(alarmInfoResponses);
     }
