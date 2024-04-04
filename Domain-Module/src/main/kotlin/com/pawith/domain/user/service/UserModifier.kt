@@ -1,7 +1,7 @@
 package com.pawith.domain.user.service
 
 import com.pawith.commonmodule.annotation.DomainService
-import com.pawith.userdomain.repository.UserRepository
+import com.pawith.domain.user.repository.UserRepository
 
 @DomainService
 class UserModifier(

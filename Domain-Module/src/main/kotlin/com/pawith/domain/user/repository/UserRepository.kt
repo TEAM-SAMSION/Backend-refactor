@@ -1,7 +1,6 @@
 package com.pawith.domain.user.repository
 
-import com.pawith.userdomain.User
-
+import com.pawith.domain.user.User
 interface UserRepository {
     fun findByEmailOrNull(email: String): User?
     fun findByIdOrNull(id: Long): User?

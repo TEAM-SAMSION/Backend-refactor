@@ -1,8 +1,8 @@
 package com.pawith.domain.user.service
 
 import com.pawith.commonmodule.annotation.DomainService
-import com.pawith.userdomain.PathHistory
-import com.pawith.userdomain.repository.PathHistoryRepository
+import com.pawith.domain.user.PathHistory
+import com.pawith.domain.user.repository.PathHistoryRepository
 
 @DomainService
 class PathHistoryAppender(
