@@ -1,17 +1,13 @@
-package com.pawith.domain.auth.repository;
+package com.pawith.domain.auth.repository
 
+import com.pawith.domain.auth.OAuth
 
-import com.pawith.domain.auth.entity.OAuth;
-import org.springframework.data.jpa.repository.JpaRepository;
+interface OAuthRepository {
+    fun existsBySub(sub: String)
 
-import java.util.Optional;
+    fun existsByUserId(userId: Long)
 
-public interface OAuthRepository extends JpaRepository<OAuth, Long> {
-    boolean existsBySub(String sub);
+    fun findBySubOrNull(sub: String) : OAuth?
 
-    boolean existsByUserId(Long userId);
-
-    Optional<OAuth> findBySub(String sub);
-
-    Optional<OAuth> findByUserId(Long userId);
+    fun findByUserIdOrNull(userId: Long) : OAuth?
 }

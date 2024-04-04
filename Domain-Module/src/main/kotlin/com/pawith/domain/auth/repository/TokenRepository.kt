@@ -1,15 +1,15 @@
-package com.pawith.domain.auth.repository;
+package com.pawith.domain.auth.repository
 
-import com.pawith.domain.auth.entity.Token;
-import com.pawith.domain.auth.jwt.TokenType;
-import org.springframework.data.jpa.repository.JpaRepository;
+import com.pawith.domain.auth.Token
+import com.pawith.domain.auth.jwt.TokenType
 
-import java.util.Optional;
+interface TokenRepository {
 
-public interface TokenRepository extends JpaRepository<Token, Long> {
-    Optional<Token> findByValueAndTokenType(String email, TokenType tokenType);
+    fun findByValueAndTokenTypeOrNull(value: String, tokenType: TokenType) : Token?
 
-    void deleteByValue(String value);
+    fun deleteByValue(value: String)
 
-    Boolean existsByValueAndTokenType(String value, TokenType tokenType);
+    fun existsByValueAndTokenType(value: String, tokenType: TokenType) : Boolean
+
+
 }
