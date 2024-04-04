@@ -1,11 +1,7 @@
-package com.pawith.domain.auth.jwt;
+package com.pawith.domain.auth.jwt
 
-import lombok.AccessLevel;
-import lombok.NoArgsConstructor;
-
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
-public final class JWTConsts {
-    public static final String TOKEN_ISSUER = "pawith";
-    public static final String USER_CLAIMS = "user_claims";
-    public static final String TOKEN_TYPE = "token_type";
+object JwtConsts {
+    const val TOKEN_ISSUER: String = "pawith"
+    const val USER_CLAIMS: String = "user_claims"
+    const val TOKEN_TYPE: String = "token_type"
 }

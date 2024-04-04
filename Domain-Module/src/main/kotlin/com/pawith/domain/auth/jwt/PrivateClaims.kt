@@ -1,53 +1,28 @@
-package com.pawith.domain.auth.jwt;
+package com.pawith.domain.auth.jwt
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import com.fasterxml.jackson.annotation.JsonProperty
 
-import java.util.Map;
+class PrivateClaims(
+    private val userClaims: PrivateClaims.UserClaims,
+    private val tokenType: TokenType
+) {
 
-@Getter
-public class PrivateClaims {
-    private final UserClaims userClaims;
-    private final TokenType tokenType;
-
-    public PrivateClaims(UserClaims userClaims, TokenType tokenType) {
-        this.userClaims = userClaims;
-        this.tokenType = tokenType;
+    companion object{
+        fun retrieveClaimsClassType(): Map<String, Class<*>> = mapOf(
+            JwtConsts.USER_CLAIMS to UserClaims::class.java,
+            JwtConsts.TOKEN_TYPE to TokenType::class.java
+        )
     }
+    fun convertToClaims(): Map<String, Any> = mapOf(
+        JwtConsts.USER_CLAIMS to userClaims,
+        JwtConsts.TOKEN_TYPE to tokenType
+    )
 
-    public Map<String, Object> createClaimsMap() {
-        return Map.of(
-                JWTConsts.USER_CLAIMS, userClaims,
-                JWTConsts.TOKEN_TYPE, tokenType.name()
-        );
-    }
 
-    public static Map<String, Class<?>> getClaimsTypeDetailMap(){
-        return Map.of(
-                JWTConsts.USER_CLAIMS, UserClaims.class,
-                JWTConsts.TOKEN_TYPE, TokenType.class
-        );
-    }
 
-    @Getter
-    @ToString
-    @NoArgsConstructor(access = AccessLevel.PROTECTED)
-    public static class UserClaims{
-        @JsonProperty("user_id")
-        private Long userId;
-        private UserClaims(Long userId) {
-            this.userId = userId;
-        }
-
-        public static UserClaims of(Long userId){
-            return new UserClaims(userId);
-        }
-
-        public PrivateClaims createPrivateClaims(TokenType tokenType) {
-            return new PrivateClaims(this, tokenType);
-        }
+    class UserClaims(
+        @JsonProperty("user_id") private val userId: Long
+    ) {
+        fun createPrivateClaims(tokenType: TokenType) = PrivateClaims(this, tokenType)
     }
 }

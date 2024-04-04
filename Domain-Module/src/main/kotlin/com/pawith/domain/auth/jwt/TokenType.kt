@@ -1,7 +1,7 @@
-package com.pawith.domain.auth.jwt;
+package com.pawith.domain.auth.jwt
 
 
-public enum TokenType {
+enum class TokenType {
     ACCESS_TOKEN,
     REFRESH_TOKEN
 }

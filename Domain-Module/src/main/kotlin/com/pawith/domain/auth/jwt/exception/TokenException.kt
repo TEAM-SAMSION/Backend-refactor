@@ -1,10 +1,6 @@
-package com.pawith.domain.auth.jwt.exception;
+package com.pawith.domain.auth.jwt.exception
 
-import com.pawith.commonmodule.exception.BusinessException;
-import com.pawith.commonmodule.exception.Error;
+import com.pawith.commonmodule.exception.BusinessException
+import com.pawith.commonmodule.exception.Error
 
-public class TokenException extends BusinessException {
-    public TokenException(Error error) {
-        super(error);
-    }
-}
+open class TokenException(error: Error) : BusinessException(error)
